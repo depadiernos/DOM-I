@@ -50,7 +50,7 @@ logo.setAttribute("src", siteContent["nav"]["img-src"]);
 let navItems = document.querySelectorAll("nav a");
 navItems.forEach((item, index) => {
   item.textContent = siteContent[`nav`][`nav-item-${index + 1}`];
-  item.style.color = "green"
+  item.style.color = "green";
 });
 
 // cta
@@ -63,6 +63,8 @@ ctaText.childNodes.forEach(node => {
     ? (node.textContent = siteContent["cta"][`${node.tagName.toLowerCase()}`])
     : null;
 });
+
+ctaText.querySelector("h1").innerHTML = "Dom<br/>Is<br />Awesome";
 
 // Main Content
 let mainContent = document.querySelector(".main-content");
@@ -79,12 +81,19 @@ mainContent
   .setAttribute("src", siteContent["main-content"]["middle-img-src"]);
 
 // Contact
-let contact = document.querySelector(".contact");
+let contactContent = document.querySelector(".contact");
+let contactElements = [];
 
+contactContent.childNodes.forEach(node => {
+  node.tagName ? contactElements.push(node) : null;
+});
 Object.keys(siteContent["contact"]).forEach(
   (item, index) =>
-    (contact.childNodes[index].textContent = siteContent["contact"][item])
+    (contactElements[index].textContent =
+      siteContent["contact"][item])
 );
+
+contactContent.querySelector("p").innerHTML = "123 Way 456 Street<br />Somewhere, USA"
 
 // Footer
 let footer = document.querySelector("footer p");
