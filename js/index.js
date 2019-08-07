@@ -48,6 +48,7 @@ const siteContent = {
 };
 
 // Example: Update the img src for the logo
+
 // nav
 let logo = document.getElementById("logo-img");
 logo.setAttribute("src", siteContent["nav"]["img-src"]);
@@ -121,7 +122,8 @@ const loginStyle = `
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 30rem;
+  justify-content: center;
+  align-items: center;
   left: 0;
   top: 0;
   width: 100%;
@@ -136,6 +138,7 @@ const modalContent = `
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  max-width: 400px;
 `;
 const modalForm = `
   display: flex;
@@ -180,7 +183,7 @@ document
 .querySelector(".login-modal span")
 .setAttribute("style", modalHoverFocus);
 ctaText.querySelector("button").onclick = () =>
-  (loginModal.style.display = "block");
+  (loginModal.style.display = "flex");
 document.querySelector(".login-modal span").onclick = () =>
   (loginModal.style.display = "none");
 window.onclick = () => (event.target == loginModal) ? (loginModal.style.display = 'none'):null
@@ -215,7 +218,7 @@ Object.keys(siteContent["contact"]).forEach(
 
 contactContent
   .querySelector("p")
-  .replaceChild("afterbegin", "123 Way 456 Street<br />Somewhere, USA");
+  .innerHTML = "123 Way 456 Street<br />Somewhere, USA"
 
 // Footer
 let footer = document.querySelector("footer p");
