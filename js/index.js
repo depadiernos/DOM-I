@@ -90,7 +90,9 @@ ctaText.childNodes.forEach(node => {
     : null;
 });
 
-ctaText.querySelector("h1").innerHTML = "Dom<br/>Is<br />Awesome";
+const ctaH1 = siteContent.cta.h1.split(' ')
+ctaText.querySelector("h1").textContent = ctaH1[0]+'\n'+ctaH1[1]+'\n'+ctaH1[2];
+ctaText.querySelector("h1").style.whiteSpace = "pre-line"
 
 // Login Modal
 
@@ -131,7 +133,8 @@ const loginStyle = `
   overflow: auto;
   background-color: #000000;
   background-color: rgba(0, 0, 0, 0.4);
-`;
+`
+
 const modalContent = `
   background-color: #fefefe;
   margin: auto;
@@ -139,7 +142,8 @@ const modalContent = `
   border: 1px solid #888;
   width: 80%;
   max-width: 400px;
-`;
+`
+
 const modalForm = `
   display: flex;
   flex-direction: column;
@@ -175,17 +179,22 @@ loginModal.querySelector(".modal-content h1").style.fontSize = "2rem";
 loginModal.querySelector(".close").setAttribute("style", modalClose);
 loginModal.querySelector(".login-modal form").setAttribute("style", modalForm);
 loginModal.setAttribute("style", loginStyle);
+
 document
 .querySelectorAll(".login-modal input")
 .forEach(input => input.setAttribute("style", modalInput));
 document.querySelector(".login-modal span").onmouseenter = () =>
 document
+
 .querySelector(".login-modal span")
 .setAttribute("style", modalHoverFocus);
+
 ctaText.querySelector("button").onclick = () =>
   (loginModal.style.display = "flex");
+
 document.querySelector(".login-modal span").onclick = () =>
   (loginModal.style.display = "none");
+  
 window.onclick = () => (event.target == loginModal) ? (loginModal.style.display = 'none'):null
 
 
@@ -216,9 +225,13 @@ Object.keys(siteContent["contact"]).forEach(
     (contactElements[index].textContent = siteContent["contact"][item])
 );
 
+const contactAddress = siteContent.contact.address.split(' ')
 contactContent
   .querySelector("p")
-  .innerHTML = "123 Way 456 Street<br />Somewhere, USA"
+  .textContent = contactAddress.slice(0,4).join(' ')+'\n'+contactAddress.slice(4).join(' ')
+contactContent
+  .querySelector("p")
+  .style.whiteSpace = "pre-line"
 
 // Footer
 let footer = document.querySelector("footer p");
