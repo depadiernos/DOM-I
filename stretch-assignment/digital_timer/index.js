@@ -59,7 +59,11 @@ const resetCounter = () => {
   secondOnes = 0;
   msHundreds = 0;
   msTens = 0;
-}
+  divSecondTens.textContent = secondTens;
+  divSecondOnes.textContent = secondOnes;
+  divMsHundreds.textContent = msHundreds;
+  divMsTens.textContent = msTens;
+};
 
 // Add Start and Reset Buttons
 
@@ -78,4 +82,4 @@ digits.appendChild(startButton);
 digits.appendChild(br2);
 digits.appendChild(resetButton);
 
-// Add some styling 
+// Add some styling
