@@ -63,6 +63,7 @@ const resetCounter = () => {
   divSecondOnes.textContent = secondOnes;
   divMsHundreds.textContent = msHundreds;
   divMsTens.textContent = msTens;
+  digit.forEach(item => (item.style.color = "black"));
 };
 
 // Add Start and Reset Buttons
