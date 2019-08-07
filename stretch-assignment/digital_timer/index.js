@@ -1,5 +1,6 @@
 // Selectors
 let digits = document.querySelector(".digits");
+let digit = document.querySelectorAll(".digit")
 let divSecondTens = document.querySelector("#secondTens");
 let divSecondOnes = document.querySelector("#secondOnes");
 let divColon = document.querySelector("#colon");
@@ -11,13 +12,6 @@ let secondTens = 0;
 let secondOnes = 0;
 let msHundreds = 0;
 let msTens = 0;
-
-if (divMsTens.textContent != msTens) {
-  divSecondTens.textContent = secondTens;
-  divSecondOnes.textContent = secondOnes;
-  divMsHundreds.textContent = msHundreds;
-  divMsTens.textContent = msTens;
-}
 
 // Counter function
 let interval = null
@@ -50,6 +44,9 @@ function counter() {
     divSecondOnes.textContent = secondOnes;
     divMsHundreds.textContent = msHundreds;
     divMsTens.textContent = msTens;
+    if (secondTens == 1) {
+      digit.forEach((item => item.style.color = 'red'))
+    }
   }, 10);
 }}
 
