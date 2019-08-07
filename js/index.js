@@ -13,6 +13,11 @@ const siteContent = {
     button: "Get Started",
     "img-src": "img/header-img.png"
   },
+  login: {
+    "input-1": "Username",
+    "input-2": "Password",
+    button: "Login"
+  },
   "main-content": {
     "features-h4": "Features",
     "features-content":
@@ -47,11 +52,31 @@ const siteContent = {
 let logo = document.getElementById("logo-img");
 logo.setAttribute("src", siteContent["nav"]["img-src"]);
 
-let navItems = document.querySelectorAll("nav a");
-navItems.forEach((item, index) => {
-  item.textContent = siteContent[`nav`][`nav-item-${index + 1}`];
-  item.style.color = "green";
+let navContent = document.querySelector("nav");
+
+let navElements = [];
+
+navContent.childNodes.forEach(node => {
+  node.tagName == "A" ? navElements.push(node) : null;
 });
+Object.keys(siteContent["nav"]).forEach((item, index) => {
+  if (navElements[index]) {
+    navElements[index].textContent = siteContent["nav"][item];
+    navElements[index].style.color = "green";
+  }
+});
+
+let home = document.createElement("a");
+home.textContent = "Home";
+home.setAttribute("href", "#");
+home.style.color = "dodgerblue";
+navContent.prepend(home);
+
+let login = document.createElement("a");
+login.textContent = "Login";
+login.setAttribute("href", "#");
+login.style.color = "dodgerblue";
+navContent.appendChild(login);
 
 // cta
 let ctaImg = document.getElementById("cta-img");
@@ -65,6 +90,102 @@ ctaText.childNodes.forEach(node => {
 });
 
 ctaText.querySelector("h1").innerHTML = "Dom<br/>Is<br />Awesome";
+
+// Login Modal
+
+const loginModalContent = //html
+`
+  <div class="login-modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h1>Login to Great Idea!</h1>
+      <form>
+        <input type="text" placeholder=${siteContent.login["input-1"]} name=${
+  siteContent.login["input-1"]
+} required />
+        <input
+          type="password"
+          placeholder=${siteContent.login["input-2"]}
+          name=${siteContent.login["input-2"]}
+          required
+        />
+        <input type="submit" value=${siteContent.login["button"]} />
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+const loginStyle = `
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 30rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
+const modalContent = `
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+`;
+const modalForm = `
+  display: flex;
+  flex-direction: column;
+`;
+const modalInput = `
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+`;
+const modalClose = `
+  color: #aaaaaa;
+  font-size: 28px;
+  font-weight: bold;
+`;
+const modalHoverFocus = `
+  color: #000;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+`;
+
+
+document.body.insertAdjacentHTML("beforeend", loginModalContent);
+let loginModal = document.querySelector(".login-modal")
+
+loginModal.setAttribute("style", loginStyle);
+loginModal.querySelector(".modal-content").setAttribute("style", modalContent);
+loginModal.querySelector(".modal-content h1").style.fontSize = "2rem";
+loginModal.querySelector(".close").setAttribute("style", modalClose);
+loginModal.querySelector(".login-modal form").setAttribute("style", modalForm);
+loginModal.setAttribute("style", loginStyle);
+document
+.querySelectorAll(".login-modal input")
+.forEach(input => input.setAttribute("style", modalInput));
+document.querySelector(".login-modal span").onmouseenter = () =>
+document
+.querySelector(".login-modal span")
+.setAttribute("style", modalHoverFocus);
+ctaText.querySelector("button").onclick = () =>
+  (loginModal.style.display = "block");
+document.querySelector(".login-modal span").onclick = () =>
+  (loginModal.style.display = "none");
+window.onclick = () => (event.target == loginModal) ? (loginModal.style.display = 'none'):null
+
+
 
 // Main Content
 let mainContent = document.querySelector(".main-content");
@@ -89,11 +210,12 @@ contactContent.childNodes.forEach(node => {
 });
 Object.keys(siteContent["contact"]).forEach(
   (item, index) =>
-    (contactElements[index].textContent =
-      siteContent["contact"][item])
+    (contactElements[index].textContent = siteContent["contact"][item])
 );
 
-contactContent.querySelector("p").innerHTML = "123 Way 456 Street<br />Somewhere, USA"
+contactContent
+  .querySelector("p")
+  .replaceChild("afterbegin", "123 Way 456 Street<br />Somewhere, USA");
 
 // Footer
 let footer = document.querySelector("footer p");
