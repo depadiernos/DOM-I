@@ -66,6 +66,7 @@ const resetCounter = () => {
 let startButton = document.createElement("button");
 let resetButton = document.createElement("button");
 let br = document.createElement("br");
+let br2 = document.createElement("br");
 startButton.textContent = "Start Timer";
 startButton.style.cssText = "width:100%;";
 startButton.onclick = startCounter;
@@ -74,5 +75,7 @@ resetButton.style.cssText = "width:100%;";
 resetButton.onclick = resetCounter;
 digits.appendChild(br);
 digits.appendChild(startButton);
-digits.appendChild(br);
+digits.appendChild(br2);
 digits.appendChild(resetButton);
+
+// Add some styling 
