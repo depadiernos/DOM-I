@@ -1,5 +1,5 @@
 // Selectors
-let digits = document.querySelector(".digit");
+let digits = document.querySelector(".digits");
 let divSecondTens = document.querySelector("#secondTens");
 let divSecondOnes = document.querySelector("#secondOnes");
 let divColon = document.querySelector("#colon");
@@ -20,30 +20,45 @@ if (divMsTens.textContent != msTens) {
 }
 
 // Counter function
+let interval = null
 
-const counter = setInterval(() => {
-  if (msTens < 9) {
-    msTens++;
-  } else {
-    msTens = 0;
-    if (msHundreds < 9) {
-      msHundreds++;
+function counter() {
+  if (interval === null) {
+    interval = setInterval(() => {
+    if (msTens < 9) {
+      msTens++;
     } else {
-      msHundreds = 0;
-      if (secondOnes < 9) {
-        secondOnes++;
+      msTens = 0;
+      if (msHundreds < 9) {
+        msHundreds++;
       } else {
-        secondOnes = 0;
-        if (secondTens < 1) {
-          secondTens++;
-          clearInterval(counter);
-        } 
+        msHundreds = 0;
+        if (secondOnes < 9) {
+          secondOnes++;
+        } else {
+          secondOnes = 0;
+          if (secondTens < 1) {
+            secondTens++;
+            clearInterval(interval);
+            interval = null;
+          }
+        }
       }
     }
-  }
 
-  divSecondTens.textContent = secondTens;
-  divSecondOnes.textContent = secondOnes;
-  divMsHundreds.textContent = msHundreds;
-  divMsTens.textContent = msTens;
-}, 10);
+    divSecondTens.textContent = secondTens;
+    divSecondOnes.textContent = secondOnes;
+    divMsHundreds.textContent = msHundreds;
+    divMsTens.textContent = msTens;
+  }, 10);
+}}
+
+// Add Start button
+
+let startButton = document.createElement('button')
+let br = document.createElement('br')
+startButton.textContent = 'Start 10 Second Timer'
+startButton.style.cssText = "width:100%;"
+startButton.onclick = counter
+digits.appendChild(br)
+digits.appendChild(startButton)
