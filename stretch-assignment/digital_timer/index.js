@@ -20,33 +20,18 @@ const startCounter = () => {
   digit.forEach(item => (item.style.color = "black"));
   if (interval === null) {
     interval = setInterval(() => {
-      if (msTens < 9) {
-        msTens++;
-      } else {
-        msTens = 0;
-        if (msHundreds < 9) {
-          msHundreds++;
-        } else {
-          msHundreds = 0;
-          if (secondOnes < 9) {
-            secondOnes++;
-          } else {
-            secondOnes = 0;
-            if (secondTens < 1) {
-              secondTens++;
-              clearInterval(interval);
-              interval = null;
-            }
-          }
-        }
-      }
-
-      divSecondTens.textContent = secondTens;
-      divSecondOnes.textContent = secondOnes;
-      divMsHundreds.textContent = msHundreds;
-      divMsTens.textContent = msTens;
+      msTens++;
+      divSecondTens.textContent =
+        msTens >= 1000 ? msTens.toString().substr(-4, 1) : 0;
+      divSecondOnes.textContent =
+        msTens >= 100 ? msTens.toString().substr(-3, 1) : 0;
+      divMsHundreds.textContent =
+        msTens >= 10 ? msTens.toString().substr(-2, 1) : 0;
+      divMsTens.textContent = msTens.toString().substr(-1, 1);
       startButton.disabled = true;
-      if (secondTens == 1) {
+      if (msTens == 1000) {
+        clearInterval(interval);
+        interval = null;
         digit.forEach(item => (item.style.color = "red"));
         startButton.disabled = false;
       }
