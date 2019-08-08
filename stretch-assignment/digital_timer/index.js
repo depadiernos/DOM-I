@@ -52,7 +52,7 @@ const resetCounter = () => {
 };
 
 // Add Start and Reset Buttons
-
+let buttonDiv = document.createElement("div")
 let startButton = document.createElement("button");
 let resetButton = document.createElement("button");
 let br = document.createElement("br");
@@ -63,9 +63,11 @@ startButton.onclick = startCounter;
 resetButton.textContent = "Reset Timer";
 resetButton.style.cssText = "width:100%;";
 resetButton.onclick = resetCounter;
-digits.appendChild(br);
-digits.appendChild(startButton);
-digits.appendChild(br2);
-digits.appendChild(resetButton);
+digits.style.cssText = "width:203px; text-align:center;";
+buttonDiv.appendChild(br);
+buttonDiv.appendChild(startButton);
+buttonDiv.appendChild(br2);
+buttonDiv.appendChild(resetButton);
+digits.appendChild(buttonDiv)
 
 // Add some styling
