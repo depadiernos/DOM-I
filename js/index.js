@@ -53,17 +53,13 @@ const siteContent = {
 let logo = document.getElementById("logo-img");
 logo.setAttribute("src", siteContent["nav"]["img-src"]);
 
-let navContent = document.querySelector("nav");
+let nav = document.querySelector("nav");
+let navContent = nav.querySelectorAll("a");
 
-let navElements = [];
-
-navContent.childNodes.forEach(node => {
-  node.tagName == "A" ? navElements.push(node) : null;
-});
 Object.keys(siteContent["nav"]).forEach((item, index) => {
-  if (navElements[index]) {
-    navElements[index].textContent = siteContent["nav"][item];
-    navElements[index].style.color = "green";
+  if (navContent[index]) {
+    navContent[index].textContent = siteContent["nav"][item];
+    navContent[index].style.color = "green";
   }
 });
 
@@ -71,13 +67,14 @@ let home = document.createElement("a");
 home.textContent = "Home";
 home.setAttribute("href", "#");
 home.style.color = "dodgerblue";
-navContent.prepend(home);
+nav.prepend(home);
 
 let login = document.createElement("a");
 login.textContent = "Login";
 login.setAttribute("href", "#");
+login.onclick = () => (loginModal.style.display = "flex");
 login.style.color = "dodgerblue";
-navContent.appendChild(login);
+nav.appendChild(login);
 
 // cta
 let ctaImg = document.getElementById("cta-img");
@@ -90,14 +87,16 @@ ctaText.childNodes.forEach(node => {
     : null;
 });
 
-const ctaH1 = siteContent.cta.h1.split(' ')
-ctaText.querySelector("h1").textContent = ctaH1[0]+'\n'+ctaH1[1]+'\n'+ctaH1[2];
-ctaText.querySelector("h1").style.whiteSpace = "pre-line"
+const ctaH1 = siteContent.cta.h1.split(" ");
+ctaText.querySelector("h1").textContent =
+  ctaH1[0] + "\n" + ctaH1[1] + "\n" + ctaH1[2];
+ctaText.querySelector("h1").style.whiteSpace = "pre-line";
 
 // Login Modal
 
-const loginModalContent = //html
-`
+const loginModalContent =
+  //html
+  `
   <div class="login-modal">
     <!-- Modal content -->
     <div class="modal-content">
@@ -105,8 +104,8 @@ const loginModalContent = //html
       <h1>Login to Great Idea!</h1>
       <form>
         <input type="text" placeholder=${siteContent.login["input-1"]} name=${
-  siteContent.login["input-1"]
-} required />
+    siteContent.login["input-1"]
+  } required />
         <input
           type="password"
           placeholder=${siteContent.login["input-2"]}
@@ -133,7 +132,7 @@ const loginStyle = `
   overflow: auto;
   background-color: #000000;
   background-color: rgba(0, 0, 0, 0.4);
-`
+`;
 
 const modalContent = `
   background-color: #fefefe;
@@ -142,7 +141,7 @@ const modalContent = `
   border: 1px solid #888;
   width: 80%;
   max-width: 400px;
-`
+`;
 
 const modalForm = `
   display: flex;
@@ -169,9 +168,8 @@ const modalHoverFocus = `
   cursor: pointer;
 `;
 
-
 document.body.insertAdjacentHTML("beforeend", loginModalContent);
-let loginModal = document.querySelector(".login-modal")
+let loginModal = document.querySelector(".login-modal");
 
 loginModal.setAttribute("style", loginStyle);
 loginModal.querySelector(".modal-content").setAttribute("style", modalContent);
@@ -181,23 +179,22 @@ loginModal.querySelector(".login-modal form").setAttribute("style", modalForm);
 loginModal.setAttribute("style", loginStyle);
 
 document
-.querySelectorAll(".login-modal input")
-.forEach(input => input.setAttribute("style", modalInput));
+  .querySelectorAll(".login-modal input")
+  .forEach(input => input.setAttribute("style", modalInput));
 document.querySelector(".login-modal span").onmouseenter = () =>
-document
+  document
 
-.querySelector(".login-modal span")
-.setAttribute("style", modalHoverFocus);
+    .querySelector(".login-modal span")
+    .setAttribute("style", modalHoverFocus);
 
 ctaText.querySelector("button").onclick = () =>
   (loginModal.style.display = "flex");
 
 document.querySelector(".login-modal span").onclick = () =>
   (loginModal.style.display = "none");
-  
-window.onclick = () => (event.target == loginModal) ? (loginModal.style.display = 'none'):null
 
-
+window.onclick = () =>
+  event.target == loginModal ? (loginModal.style.display = "none") : null;
 
 // Main Content
 let mainContent = document.querySelector(".main-content");
@@ -215,23 +212,19 @@ mainContent
 
 // Contact
 let contactContent = document.querySelector(".contact");
-let contactElements = [];
+let contactElements = contactContent.children;
 
-contactContent.childNodes.forEach(node => {
-  node.tagName ? contactElements.push(node) : null;
-});
 Object.keys(siteContent["contact"]).forEach(
   (item, index) =>
     (contactElements[index].textContent = siteContent["contact"][item])
 );
 
-const contactAddress = siteContent.contact.address.split(' ')
-contactContent
-  .querySelector("p")
-  .textContent = contactAddress.slice(0,4).join(' ')+'\n'+contactAddress.slice(4).join(' ')
-contactContent
-  .querySelector("p")
-  .style.whiteSpace = "pre-line"
+const contactAddress = siteContent.contact.address.split(" ");
+contactContent.querySelector("p").textContent =
+  contactAddress.slice(0, 4).join(" ") +
+  "\n" +
+  contactAddress.slice(4).join(" ");
+contactContent.querySelector("p").style.whiteSpace = "pre-line";
 
 // Footer
 let footer = document.querySelector("footer p");
